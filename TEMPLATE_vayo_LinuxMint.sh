@@ -22,4 +22,23 @@ wget https://github.com/vinceliuice/Fluent-gtk-theme/archive/refs/tags/2025-04-1
 tar -xzf 2025-04-17.tar.gz
 cd 2025-04-17.tar.gz
 sudo ./install.sh
-gsettings set org.cinnamon.theme name "Fluent"
+#gsettings set org.cinnamon.theme name "Fluent"
+
+# Verificar se tema existe
+if [ -d "/usr/share/themes/Fluent-round-Dark" ] || [ -d "$HOME/.themes/Fluent-round-Dark" ]; then
+    echo "Aplicando tema Fluent Dark..."
+
+    # Aplicar temas
+    gsettings set org.cinnamon.desktop.interface gtk-theme "Fluent-round-Dark"
+    gsettings set org.cinnamon.desktop.wm.preferences theme "Fluent-round-Dark"
+    gsettings set org.cinnamon.theme name "Fluent-round-Dark"
+
+    echo "Tema aplicado com sucesso!"
+    echo "Reinicie o Cinnamon com Alt+F2 -> r"
+else
+    echo "Tema Fluent não encontrado!"
+    echo "Temas disponíveis:"
+    ls /usr/share/themes/ | grep -i fluent
+    ls ~/.themes/ | grep -i fluent 2>/dev/null
+fi
+
