@@ -8,38 +8,18 @@ sudo apt autoremove transmission-common -y
 echo 'uninstall Matri Online Chat '
 sudo apt purge mintchat -ysudo flatpak install com.brave.Browser -y
 sudo apt purge webapp-manager -y && sudo apt autoremove -y
+sudo mv -v /etc/apt/preferences.d/nosnap.pref /home/p527488/Downloads/
+sudo apt install snapd -y
 
+echo 'Instalação do SNAP'
+sudo apt install snapd
+sudo systemctl enable snapd
+sudo systemctl start snapd
 
-echo 'Install GTK Theme'
-#sudo apt update
-sudo apt install git curl wget unzip gnome-tweaks gtk2-engines-murrine gtk2-engines-pixbuf
-
-# Download WhiteSur theme (Windows 11-like)
-cd ~/Downloads
-git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
-cd WhiteSur-gtk-theme
-./install.sh -l -c Dark # Install with light version and dark variant
-
-# Set GTK theme
-gsettings set org.cinnamon.desktop.interface gtk-theme "WhiteSur-Dark"
-
-
-echo 'Configure Taskbar/Panel'
-
-sudo apt install plank
-# Start plank
-plank &
-
-# Make it autostart
-mkdir -p ~/.config/autostart
-cat > ~/.config/autostart/plank.desktop << EOF
-[Desktop Entry]
-Type=Application
-Exec=plank
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=Plank
-Comment=Plank Dock
-EOF
-sudo timedatectl set-timezone America/Sao_Paulo
+echo 'Windows Theme'
+wget https://github.com/vinceliuice/Fluent-gtk-theme/archive/refs/tags/2025-04-17.tar.gz 
+#mkdir Fluent-gtk-theme-2025-04-17 
+tar -xzf 2025-04-17.tar.gz
+cd 2025-04-17.tar.gz
+sudo ./install.sh
+gsettings set org.cinnamon.theme name "Fluent"
